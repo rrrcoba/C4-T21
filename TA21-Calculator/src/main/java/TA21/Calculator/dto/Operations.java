@@ -33,4 +33,22 @@ public class Operations {
 
 		return result;
 	}
+	
+	public Double multiply(String num1, String num2) {
+		double n1 = Double.parseDouble(num1);
+		double n2 = Double.parseDouble(num2);
+
+		double result = n1 * n2;
+
+		return result;
+	}
+	
+	public Double oneDivide(String num2) {
+		double n1 = 1.0;
+		double n2 = Double.parseDouble(num2);
+
+		double result = n1 / n2;
+
+		return result;
+	}
 }

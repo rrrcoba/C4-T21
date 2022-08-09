@@ -224,6 +224,7 @@ public class Dashboard extends JFrame {
 					textFieldResult.setText(r);
 					addHist(r);
 				}
+
 				if(operator == btnMinus) {
 					if (num1.compareTo("") == 0) {
 						num1 = "0";
@@ -235,8 +236,30 @@ public class Dashboard extends JFrame {
 					String r = String.valueOf(result);
 					textFieldResult.setText(r);
 					addHist(r);
-					
+				}
+
+				if(operator == btnMultiply) {
+					if (num1.compareTo("") == 0) {
+						num1 = "0";
 					}
+					if (num2.compareTo("") == 0) {
+						num2 = "0";
+					}
+					Double result = operations.multiply(num1, num2);
+					String r = String.valueOf(result);
+					textFieldResult.setText(r);
+					addHist(r);
+				}
+
+				if(operator == btnX) {
+					if (num2.compareTo("") == 0) {
+						num2 = "0";
+					}
+					Double result = operations.oneDivide(num2);
+					String r = String.valueOf(result);
+					textFieldResult.setText(r);
+					addHist(r);
+				}
 			}
 		});
 
@@ -307,12 +330,28 @@ public class Dashboard extends JFrame {
 
 		btnMultiply = new JButton("x");
 		btnMultiply.setFont(new Font("Arial Black", Font.PLAIN, 22));
+		btnMultiply.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				num1 = textFieldResult.getText();
+				textFieldResult.setText("");
+				operator = btnMultiply;
+
+			}
+		});
 
 		btnDivide = new JButton("/");
 		btnDivide.setFont(new Font("Arial Black", Font.PLAIN, 22));
 
 		btnX = new JButton("1/x");
 		btnX.setFont(new Font("Arial Black", Font.PLAIN, 22));
+		btnX.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				num2 = textFieldResult.getText();			
+				operator = btnX;
+
+			}
+		});
+
 
 		btnPercent = new JButton("%");
 		btnPercent.setFont(new Font("Arial Black", Font.PLAIN, 22));
@@ -332,7 +371,7 @@ public class Dashboard extends JFrame {
 
 		lblHistory = new JLabel("Historial");
 		lblHistory.setFont(new Font("Arial Black", Font.PLAIN, 18));
-		
+
 		initGroupLayout();
 	}
 
@@ -376,13 +415,13 @@ public class Dashboard extends JFrame {
 														GroupLayout.PREFERRED_SIZE, 108, GroupLayout.PREFERRED_SIZE)))
 								.addGroup(
 										gl_contentPane.createSequentialGroup()
-												.addComponent(btnPercent, GroupLayout.PREFERRED_SIZE, 108,
-														GroupLayout.PREFERRED_SIZE)
-												.addPreferredGap(ComponentPlacement.RELATED)
-												.addComponent(btnSqrt, GroupLayout.PREFERRED_SIZE, 108,
-														GroupLayout.PREFERRED_SIZE)
-												.addPreferredGap(ComponentPlacement.RELATED).addComponent(btnElevated,
-														GroupLayout.PREFERRED_SIZE, 108, GroupLayout.PREFERRED_SIZE)))
+										.addComponent(btnPercent, GroupLayout.PREFERRED_SIZE, 108,
+												GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addComponent(btnSqrt, GroupLayout.PREFERRED_SIZE, 108,
+												GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(ComponentPlacement.RELATED).addComponent(btnElevated,
+												GroupLayout.PREFERRED_SIZE, 108, GroupLayout.PREFERRED_SIZE)))
 						.addPreferredGap(ComponentPlacement.RELATED)
 						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 								.addComponent(btnDivide, GroupLayout.PREFERRED_SIZE, 108, GroupLayout.PREFERRED_SIZE)
@@ -419,23 +458,23 @@ public class Dashboard extends JFrame {
 																		Short.MAX_VALUE)))))
 								.addGroup(Alignment.LEADING,
 										gl_contentPane.createSequentialGroup().addContainerGap()
-												.addComponent(btn_4, GroupLayout.PREFERRED_SIZE, 108,
-														GroupLayout.PREFERRED_SIZE)
-												.addPreferredGap(ComponentPlacement.RELATED)
-												.addComponent(btn_5, GroupLayout.PREFERRED_SIZE, 108,
-														GroupLayout.PREFERRED_SIZE)
-												.addPreferredGap(ComponentPlacement.UNRELATED)
-												.addComponent(btn_6, GroupLayout.PREFERRED_SIZE, 108,
-														GroupLayout.PREFERRED_SIZE)
-												.addPreferredGap(ComponentPlacement.RELATED).addComponent(btnMinus,
-														GroupLayout.PREFERRED_SIZE, 108, GroupLayout.PREFERRED_SIZE))))
+										.addComponent(btn_4, GroupLayout.PREFERRED_SIZE, 108,
+												GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addComponent(btn_5, GroupLayout.PREFERRED_SIZE, 108,
+												GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(ComponentPlacement.UNRELATED)
+										.addComponent(btn_6, GroupLayout.PREFERRED_SIZE, 108,
+												GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(ComponentPlacement.RELATED).addComponent(btnMinus,
+												GroupLayout.PREFERRED_SIZE, 108, GroupLayout.PREFERRED_SIZE))))
 				.addGap(18).addGroup(
 						gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_contentPane.createSequentialGroup()
-										.addComponent(lblHistory, GroupLayout.PREFERRED_SIZE, 112,
-												GroupLayout.PREFERRED_SIZE)
-										.addGap(187))
-								.addComponent(textFieldHist, GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE))));
+						.addGroup(gl_contentPane.createSequentialGroup()
+								.addComponent(lblHistory, GroupLayout.PREFERRED_SIZE, 112,
+										GroupLayout.PREFERRED_SIZE)
+								.addGap(187))
+						.addComponent(textFieldHist, GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE))));
 		gl_contentPane.setVerticalGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 						.addGroup(gl_contentPane
