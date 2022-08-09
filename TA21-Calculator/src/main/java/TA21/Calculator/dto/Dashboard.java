@@ -213,7 +213,6 @@ public class Dashboard extends JFrame {
 
 				// Suma
 				if (operator == btnSum) {
-					System.out.println("primer syso");
 					if (num1.compareTo("") == 0) {
 						num1 = "0";
 					}
@@ -221,12 +220,23 @@ public class Dashboard extends JFrame {
 						num2 = "0";
 					}
 					Double result = operations.plus(num1, num2);
-					System.out.println("segundo syso " + result);
 					String r = String.valueOf(result);
 					textFieldResult.setText(r);
 					addHist(r);
-					System.out.println("tercer syso" + r);
 				}
+				if(operator == btnMinus) {
+					if (num1.compareTo("") == 0) {
+						num1 = "0";
+					}
+					if (num2.compareTo("") == 0) {
+						num2 = "0";
+					}
+					Double result = operations.minus(num1, num2);
+					String r = String.valueOf(result);
+					textFieldResult.setText(r);
+					addHist(r);
+					
+					}
 			}
 		});
 
@@ -286,6 +296,14 @@ public class Dashboard extends JFrame {
 
 		btnMinus = new JButton("-");
 		btnMinus.setFont(new Font("Arial Black", Font.PLAIN, 22));
+		btnMinus.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				num1 = textFieldResult.getText();
+				textFieldResult.setText("");
+				operator = btnMinus;
+
+			}
+		});
 
 		btnMultiply = new JButton("x");
 		btnMultiply.setFont(new Font("Arial Black", Font.PLAIN, 22));
@@ -314,7 +332,7 @@ public class Dashboard extends JFrame {
 
 		lblHistory = new JLabel("Historial");
 		lblHistory.setFont(new Font("Arial Black", Font.PLAIN, 18));
-
+		
 		initGroupLayout();
 	}
 
