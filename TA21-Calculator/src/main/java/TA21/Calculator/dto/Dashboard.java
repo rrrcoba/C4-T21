@@ -1,37 +1,32 @@
 package TA21.Calculator.dto;
 
-import java.awt.Color;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
-import java.awt.FlowLayout;
-import javax.swing.JInternalFrame;
-import javax.swing.JLayeredPane;
-import javax.swing.border.BevelBorder;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
-import javax.swing.JTabbedPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.Font;
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class Dashboard extends JFrame {
-	
-	private String n1;
-	private String n2;
+
+	private static final long serialVersionUID = 1L;
+
+	private Operations operations = new Operations();
+
+	private String num1;
+	private String num2;
 	private JButton operator;
 
 	private JPanel contentPane;
-	
+
 	private JTextField textFieldResult;
 	private JTextField textFieldHist;
-	
+
 	private JButton btnPoint;
 	private JButton btn_0;
 	private JButton btn_1;
@@ -43,12 +38,12 @@ public class Dashboard extends JFrame {
 	private JButton btn_7;
 	private JButton btn_8;
 	private JButton btn_9;
-	
+
 	private JButton btn_result;
 	private JButton btnDelete;
 	private JButton btnC;
 	private JButton btnCe;
-	
+
 	private JButton btnSum;
 	private JButton btnMinus;
 	private JButton btnMultiply;
@@ -58,12 +53,11 @@ public class Dashboard extends JFrame {
 	private JButton btnSqrt;
 	private JButton btnElevated;
 	private JButton btnMoreLess;
-	
+
 	private JLabel lblHistory;
-	
+
 	private GroupLayout gl_contentPane;
 
-	
 	/**
 	 * Constructor ventana en blanco que llama a los otros elementos
 	 */
@@ -95,14 +89,14 @@ public class Dashboard extends JFrame {
 	 * Inserta en el JFrame todos los elementos de la calculadora
 	 */
 	private void calculatorElements() {
-		
+
 		btnPoint = new JButton(",");
 		btnPoint.setFont(new Font("Arial Black", Font.PLAIN, 22));
 		btnPoint.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String text = textFieldResult.getText();
 				String buttonText = ".";
-				textFieldResult.setText(text+buttonText);
+				textFieldResult.setText(text + buttonText);
 			}
 		});
 
@@ -112,17 +106,17 @@ public class Dashboard extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String text = textFieldResult.getText();
 				String buttonText = btn_0.getText();
-				textFieldResult.setText(text+buttonText);
+				textFieldResult.setText(text + buttonText);
 			}
 		});
-		
+
 		btn_1 = new JButton("1");
 		btn_1.setFont(new Font("Arial Black", Font.PLAIN, 22));
 		btn_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String text = textFieldResult.getText();
 				String buttonText = btn_1.getText();
-				textFieldResult.setText(text+buttonText);
+				textFieldResult.setText(text + buttonText);
 			}
 		});
 
@@ -132,7 +126,7 @@ public class Dashboard extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String text = textFieldResult.getText();
 				String buttonText = btn_2.getText();
-				textFieldResult.setText(text+buttonText);
+				textFieldResult.setText(text + buttonText);
 			}
 		});
 
@@ -142,7 +136,7 @@ public class Dashboard extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String text = textFieldResult.getText();
 				String buttonText = btn_3.getText();
-				textFieldResult.setText(text+buttonText);
+				textFieldResult.setText(text + buttonText);
 			}
 		});
 
@@ -152,7 +146,7 @@ public class Dashboard extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String text = textFieldResult.getText();
 				String buttonText = btn_4.getText();
-				textFieldResult.setText(text+buttonText);
+				textFieldResult.setText(text + buttonText);
 			}
 		});
 
@@ -162,7 +156,7 @@ public class Dashboard extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String text = textFieldResult.getText();
 				String buttonText = btn_5.getText();
-				textFieldResult.setText(text+buttonText);
+				textFieldResult.setText(text + buttonText);
 			}
 		});
 
@@ -172,17 +166,17 @@ public class Dashboard extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String text = textFieldResult.getText();
 				String buttonText = btn_6.getText();
-				textFieldResult.setText(text+buttonText);
+				textFieldResult.setText(text + buttonText);
 			}
 		});
-		
+
 		btn_7 = new JButton("7");
 		btn_7.setFont(new Font("Arial Black", Font.PLAIN, 22));
 		btn_7.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String text = textFieldResult.getText();
 				String buttonText = btn_7.getText();
-				textFieldResult.setText(text+buttonText);
+				textFieldResult.setText(text + buttonText);
 			}
 		});
 
@@ -192,7 +186,7 @@ public class Dashboard extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String text = textFieldResult.getText();
 				String buttonText = btn_8.getText();
-				textFieldResult.setText(text+buttonText);
+				textFieldResult.setText(text + buttonText);
 			}
 		});
 
@@ -202,11 +196,10 @@ public class Dashboard extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String text = textFieldResult.getText();
 				String buttonText = btn_9.getText();
-				textFieldResult.setText(text+buttonText);
+				textFieldResult.setText(text + buttonText);
 			}
 		});
-		
-		
+
 		textFieldResult = new JTextField();
 		textFieldResult.setFont(new Font("Arial Black", Font.PLAIN, 22));
 		textFieldResult.setColumns(10);
@@ -214,18 +207,40 @@ public class Dashboard extends JFrame {
 		// TODO
 		btn_result = new JButton("=");
 		btn_result.setFont(new Font("Arial Black", Font.PLAIN, 22));
-		
+		btn_result.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				num2 = textFieldResult.getText();
+
+				// Suma
+				if (operator == btnSum) {
+					System.out.println("primer syso");
+					if (num1.compareTo("") == 0) {
+						num1 = "0";
+					}
+					if (num2.compareTo("") == 0) {
+						num2 = "0";
+					}
+					Double result = operations.plus(num1, num2);
+					System.out.println("segundo syso " + result);
+					String r = String.valueOf(result);
+					textFieldResult.setText(r);
+					addHist(r);
+					System.out.println("tercer syso" + r);
+				}
+			}
+		});
+
 		btnDelete = new JButton("Del");
 		btnDelete.setFont(new Font("Arial Black", Font.PLAIN, 22));
 		btnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// Saca el texto del textField y le quita el último caracter de la cadena 
+				// Saca el texto del textField y le quita el último caracter de la cadena
 				// utilizando StringBuffer y "deleteCharAt" .
 				// Por último añade otra vez el resultado al textField en formato String.
 				try {
-					String text = textFieldResult.getText();  
-					StringBuffer sb= new StringBuffer(text);   
-					sb.deleteCharAt(sb.length()-1);  
+					String text = textFieldResult.getText();
+					StringBuffer sb = new StringBuffer(text);
+					sb.deleteCharAt(sb.length() - 1);
 					textFieldResult.setText(sb.toString());
 				} catch (StringIndexOutOfBoundsException ex) {
 					System.out.println("No hay más carácteres por eliminar.");
@@ -237,20 +252,37 @@ public class Dashboard extends JFrame {
 		btnC.setFont(new Font("Arial Black", Font.PLAIN, 22));
 		btnC.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// Pone el textField, los operandos y el operador en blanco  
+				// Pone el textField, los operandos y el operador en blanco
 				textFieldResult.setText("");
-				n1="";
-				n2="";
+				num1 = "";
+				num2 = "";
 				operator = null;
 			}
 		});
 
 		btnCe = new JButton("CE");
 		btnCe.setFont(new Font("Arial Black", Font.PLAIN, 22));
-		
-		
+		btnCe.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// Pone el textField, los operandos, el operador y el historial en blanco
+				textFieldResult.setText("");
+				num1 = "";
+				num2 = "";
+				operator = null;
+				textFieldHist.setText("");
+			}
+		});
+
 		btnSum = new JButton("+");
 		btnSum.setFont(new Font("Arial Black", Font.PLAIN, 22));
+		btnSum.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				num1 = textFieldResult.getText();
+				textFieldResult.setText("");
+				operator = btnSum;
+
+			}
+		});
 
 		btnMinus = new JButton("-");
 		btnMinus.setFont(new Font("Arial Black", Font.PLAIN, 22));
@@ -267,12 +299,9 @@ public class Dashboard extends JFrame {
 		btnPercent = new JButton("%");
 		btnPercent.setFont(new Font("Arial Black", Font.PLAIN, 22));
 
-		btnSqrt = new JButton("");
-		btnSqrt.setIcon(new ImageIcon(Dashboard.class.getResource("/icons/1.png")));
-		btnSqrt.setForeground(Color.WHITE);
-		btnSqrt.setBackground(Color.WHITE);
+		btnSqrt = new JButton("sqrt");
 		btnSqrt.setFont(new Font("Arial Black", Font.PLAIN, 22));
-		
+
 		btnMoreLess = new JButton("+/-");
 		btnMoreLess.setFont(new Font("Arial Black", Font.PLAIN, 22));
 
@@ -289,137 +318,183 @@ public class Dashboard extends JFrame {
 		initGroupLayout();
 	}
 
-	
-	
 	/**
-	 * Inicializa el layout correctamente
+	 * Añade otro resultado al historial
+	 * 
+	 * @param text
+	 */
+	public void addHist(String text) {
+		String hist = textFieldHist.getText();
+		textFieldHist.setText(hist + "\n" + text);
+	}
+
+	/**
+	 * Inicializa el layout muy correctamente.
 	 */
 	private void initGroupLayout() {
 		gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addContainerGap()
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+		gl_contentPane.setHorizontalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addGroup(gl_contentPane
+				.createSequentialGroup()
+				.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addGroup(gl_contentPane
+						.createSequentialGroup().addContainerGap()
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 								.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
-									.addGroup(gl_contentPane.createSequentialGroup()
-										.addComponent(btn_7, GroupLayout.PREFERRED_SIZE, 108, GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(btn_8, GroupLayout.PREFERRED_SIZE, 108, GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(ComponentPlacement.UNRELATED)
-										.addComponent(btn_9, GroupLayout.PREFERRED_SIZE, 108, GroupLayout.PREFERRED_SIZE))
-									.addGroup(gl_contentPane.createSequentialGroup()
-										.addComponent(btnCe, GroupLayout.PREFERRED_SIZE, 108, GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-										.addComponent(btnC, GroupLayout.PREFERRED_SIZE, 108, GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(ComponentPlacement.UNRELATED)
-										.addComponent(btnDelete, GroupLayout.PREFERRED_SIZE, 108, GroupLayout.PREFERRED_SIZE)))
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addComponent(btnPercent, GroupLayout.PREFERRED_SIZE, 108, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(btnSqrt, GroupLayout.PREFERRED_SIZE, 108, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(btnElevated, GroupLayout.PREFERRED_SIZE, 108, GroupLayout.PREFERRED_SIZE)))
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+										.addGroup(gl_contentPane.createSequentialGroup()
+												.addComponent(btn_7, GroupLayout.PREFERRED_SIZE, 108,
+														GroupLayout.PREFERRED_SIZE)
+												.addPreferredGap(ComponentPlacement.RELATED)
+												.addComponent(btn_8, GroupLayout.PREFERRED_SIZE, 108,
+														GroupLayout.PREFERRED_SIZE)
+												.addPreferredGap(ComponentPlacement.UNRELATED).addComponent(btn_9,
+														GroupLayout.PREFERRED_SIZE, 108, GroupLayout.PREFERRED_SIZE))
+										.addGroup(gl_contentPane.createSequentialGroup()
+												.addComponent(btnCe, GroupLayout.PREFERRED_SIZE, 108,
+														GroupLayout.PREFERRED_SIZE)
+												.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE,
+														Short.MAX_VALUE)
+												.addComponent(btnC, GroupLayout.PREFERRED_SIZE, 108,
+														GroupLayout.PREFERRED_SIZE)
+												.addPreferredGap(ComponentPlacement.UNRELATED).addComponent(btnDelete,
+														GroupLayout.PREFERRED_SIZE, 108, GroupLayout.PREFERRED_SIZE)))
+								.addGroup(
+										gl_contentPane.createSequentialGroup()
+												.addComponent(btnPercent, GroupLayout.PREFERRED_SIZE, 108,
+														GroupLayout.PREFERRED_SIZE)
+												.addPreferredGap(ComponentPlacement.RELATED)
+												.addComponent(btnSqrt, GroupLayout.PREFERRED_SIZE, 108,
+														GroupLayout.PREFERRED_SIZE)
+												.addPreferredGap(ComponentPlacement.RELATED).addComponent(btnElevated,
+														GroupLayout.PREFERRED_SIZE, 108, GroupLayout.PREFERRED_SIZE)))
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 								.addComponent(btnDivide, GroupLayout.PREFERRED_SIZE, 108, GroupLayout.PREFERRED_SIZE)
 								.addComponent(btnMultiply, GroupLayout.PREFERRED_SIZE, 108, GroupLayout.PREFERRED_SIZE)
 								.addComponent(btnX, GroupLayout.PREFERRED_SIZE, 108, GroupLayout.PREFERRED_SIZE)))
 						.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+										.addGroup(gl_contentPane.createSequentialGroup().addGap(12)
+												.addComponent(btnMoreLess, GroupLayout.PREFERRED_SIZE, 106,
+														GroupLayout.PREFERRED_SIZE)
+												.addPreferredGap(ComponentPlacement.RELATED)
+												.addComponent(btn_0, GroupLayout.PREFERRED_SIZE, 108,
+														GroupLayout.PREFERRED_SIZE)
+												.addPreferredGap(ComponentPlacement.UNRELATED)
+												.addComponent(btnPoint, GroupLayout.PREFERRED_SIZE, 108,
+														GroupLayout.PREFERRED_SIZE)
+												.addPreferredGap(ComponentPlacement.UNRELATED).addComponent(btn_result,
+														GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
+														Short.MAX_VALUE))
+										.addGroup(gl_contentPane.createSequentialGroup().addContainerGap()
+												.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+														.addComponent(textFieldResult)
+														.addGroup(gl_contentPane.createSequentialGroup()
+																.addComponent(btn_1, GroupLayout.PREFERRED_SIZE, 108,
+																		GroupLayout.PREFERRED_SIZE)
+																.addPreferredGap(ComponentPlacement.RELATED)
+																.addComponent(btn_2, GroupLayout.PREFERRED_SIZE, 108,
+																		GroupLayout.PREFERRED_SIZE)
+																.addPreferredGap(ComponentPlacement.UNRELATED)
+																.addComponent(btn_3, GroupLayout.PREFERRED_SIZE, 108,
+																		GroupLayout.PREFERRED_SIZE)
+																.addPreferredGap(ComponentPlacement.UNRELATED)
+																.addComponent(btnSum, GroupLayout.DEFAULT_SIZE, 104,
+																		Short.MAX_VALUE)))))
+								.addGroup(Alignment.LEADING,
+										gl_contentPane.createSequentialGroup().addContainerGap()
+												.addComponent(btn_4, GroupLayout.PREFERRED_SIZE, 108,
+														GroupLayout.PREFERRED_SIZE)
+												.addPreferredGap(ComponentPlacement.RELATED)
+												.addComponent(btn_5, GroupLayout.PREFERRED_SIZE, 108,
+														GroupLayout.PREFERRED_SIZE)
+												.addPreferredGap(ComponentPlacement.UNRELATED)
+												.addComponent(btn_6, GroupLayout.PREFERRED_SIZE, 108,
+														GroupLayout.PREFERRED_SIZE)
+												.addPreferredGap(ComponentPlacement.RELATED).addComponent(btnMinus,
+														GroupLayout.PREFERRED_SIZE, 108, GroupLayout.PREFERRED_SIZE))))
+				.addGap(18).addGroup(
+						gl_contentPane.createParallelGroup(Alignment.LEADING)
 								.addGroup(gl_contentPane.createSequentialGroup()
-									.addGap(12)
-									.addComponent(btnMoreLess, GroupLayout.PREFERRED_SIZE, 106, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(btn_0, GroupLayout.PREFERRED_SIZE, 108, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.UNRELATED)
-									.addComponent(btnPoint, GroupLayout.PREFERRED_SIZE, 108, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.UNRELATED)
-									.addComponent(btn_result, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addContainerGap()
-									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-										.addComponent(textFieldResult)
-										.addGroup(gl_contentPane.createSequentialGroup()
-											.addComponent(btn_1, GroupLayout.PREFERRED_SIZE, 108, GroupLayout.PREFERRED_SIZE)
-											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(btn_2, GroupLayout.PREFERRED_SIZE, 108, GroupLayout.PREFERRED_SIZE)
-											.addPreferredGap(ComponentPlacement.UNRELATED)
-											.addComponent(btn_3, GroupLayout.PREFERRED_SIZE, 108, GroupLayout.PREFERRED_SIZE)
-											.addPreferredGap(ComponentPlacement.UNRELATED)
-											.addComponent(btnSum, GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)))))
-							.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
-								.addContainerGap()
-								.addComponent(btn_4, GroupLayout.PREFERRED_SIZE, 108, GroupLayout.PREFERRED_SIZE)
-								.addPreferredGap(ComponentPlacement.RELATED)
-								.addComponent(btn_5, GroupLayout.PREFERRED_SIZE, 108, GroupLayout.PREFERRED_SIZE)
-								.addPreferredGap(ComponentPlacement.UNRELATED)
-								.addComponent(btn_6, GroupLayout.PREFERRED_SIZE, 108, GroupLayout.PREFERRED_SIZE)
-								.addPreferredGap(ComponentPlacement.RELATED)
-								.addComponent(btnMinus, GroupLayout.PREFERRED_SIZE, 108, GroupLayout.PREFERRED_SIZE))))
-					.addGap(18)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(lblHistory, GroupLayout.PREFERRED_SIZE, 112, GroupLayout.PREFERRED_SIZE)
-							.addGap(187))
-						.addComponent(textFieldHist, GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)))
-		);
-		gl_contentPane.setVerticalGroup(
-			gl_contentPane.createParallelGroup(Alignment.TRAILING)
+										.addComponent(lblHistory, GroupLayout.PREFERRED_SIZE, 112,
+												GroupLayout.PREFERRED_SIZE)
+										.addGap(187))
+								.addComponent(textFieldHist, GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE))));
+		gl_contentPane.setVerticalGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(textFieldResult, GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(40)
-							.addComponent(lblHistory, GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)))
-					.addGap(18)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addComponent(textFieldHist, GroupLayout.DEFAULT_SIZE, 441, Short.MAX_VALUE)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addComponent(btnX, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE)
-								.addComponent(btnPercent, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE)
-								.addComponent(btnSqrt, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE)
-								.addComponent(btnElevated, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE))
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addComponent(btnDivide, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE)
-								.addComponent(btnDelete, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE)
-								.addComponent(btnC, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE)
-								.addComponent(btnCe, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE))
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-								.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-									.addComponent(btn_7, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE)
-									.addComponent(btn_9, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE)
-									.addComponent(btn_8, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE))
-								.addComponent(btnMultiply, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE))
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addComponent(btn_4, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE)
-								.addComponent(btn_5, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE)
-								.addComponent(btn_6, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE)
-								.addComponent(btnMinus, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE))
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addComponent(btn_1, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE)
-								.addComponent(btn_2, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE)
-								.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-									.addComponent(btn_3, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE)
-									.addComponent(btnSum, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE)))
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-								.addComponent(btnMoreLess, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE)
-								.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-									.addComponent(btnPoint, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE)
-									.addComponent(btn_result, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE))
-								.addComponent(btn_0, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE))))
-					.addContainerGap())
-		);
+						.addGroup(gl_contentPane
+								.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_contentPane.createSequentialGroup().addContainerGap().addComponent(
+										textFieldResult, GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE))
+								.addGroup(gl_contentPane
+										.createSequentialGroup().addGap(40)
+										.addComponent(lblHistory, GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)))
+						.addGap(18)
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+								.addComponent(textFieldHist, GroupLayout.DEFAULT_SIZE, 441, Short.MAX_VALUE)
+								.addGroup(gl_contentPane.createSequentialGroup().addGroup(gl_contentPane
+										.createParallelGroup(Alignment.LEADING)
+										.addComponent(btnX, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE)
+										.addComponent(btnPercent, GroupLayout.PREFERRED_SIZE, 66,
+												GroupLayout.PREFERRED_SIZE)
+										.addComponent(btnSqrt, GroupLayout.PREFERRED_SIZE, 66,
+												GroupLayout.PREFERRED_SIZE)
+										.addComponent(btnElevated, GroupLayout.PREFERRED_SIZE, 66,
+												GroupLayout.PREFERRED_SIZE))
+										.addPreferredGap(ComponentPlacement.UNRELATED)
+										.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+												.addComponent(btnDivide, GroupLayout.PREFERRED_SIZE, 66,
+														GroupLayout.PREFERRED_SIZE)
+												.addComponent(btnDelete, GroupLayout.PREFERRED_SIZE, 66,
+														GroupLayout.PREFERRED_SIZE)
+												.addComponent(btnC, GroupLayout.PREFERRED_SIZE, 66,
+														GroupLayout.PREFERRED_SIZE)
+												.addComponent(
+														btnCe, GroupLayout.PREFERRED_SIZE, 66,
+														GroupLayout.PREFERRED_SIZE))
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+												.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+														.addComponent(btn_7, GroupLayout.PREFERRED_SIZE, 66,
+																GroupLayout.PREFERRED_SIZE)
+														.addComponent(btn_9, GroupLayout.PREFERRED_SIZE, 66,
+																GroupLayout.PREFERRED_SIZE)
+														.addComponent(btn_8, GroupLayout.PREFERRED_SIZE, 66,
+																GroupLayout.PREFERRED_SIZE))
+												.addComponent(
+														btnMultiply, GroupLayout.PREFERRED_SIZE, 66,
+														GroupLayout.PREFERRED_SIZE))
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+												.addComponent(btn_4, GroupLayout.PREFERRED_SIZE, 66,
+														GroupLayout.PREFERRED_SIZE)
+												.addComponent(btn_5, GroupLayout.PREFERRED_SIZE, 66,
+														GroupLayout.PREFERRED_SIZE)
+												.addComponent(btn_6, GroupLayout.PREFERRED_SIZE, 66,
+														GroupLayout.PREFERRED_SIZE)
+												.addComponent(btnMinus, GroupLayout.PREFERRED_SIZE, 66,
+														GroupLayout.PREFERRED_SIZE))
+										.addPreferredGap(ComponentPlacement.UNRELATED)
+										.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+												.addComponent(btn_1, GroupLayout.PREFERRED_SIZE, 66,
+														GroupLayout.PREFERRED_SIZE)
+												.addComponent(btn_2, GroupLayout.PREFERRED_SIZE, 66,
+														GroupLayout.PREFERRED_SIZE)
+												.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+														.addComponent(btn_3, GroupLayout.PREFERRED_SIZE, 66,
+																GroupLayout.PREFERRED_SIZE)
+														.addComponent(btnSum, GroupLayout.PREFERRED_SIZE, 66,
+																GroupLayout.PREFERRED_SIZE)))
+										.addPreferredGap(ComponentPlacement.UNRELATED)
+										.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+												.addComponent(btnMoreLess, GroupLayout.PREFERRED_SIZE, 66,
+														GroupLayout.PREFERRED_SIZE)
+												.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+														.addComponent(btnPoint, GroupLayout.PREFERRED_SIZE, 66,
+																GroupLayout.PREFERRED_SIZE)
+														.addComponent(btn_result, GroupLayout.PREFERRED_SIZE, 66,
+																GroupLayout.PREFERRED_SIZE))
+												.addComponent(btn_0, GroupLayout.PREFERRED_SIZE, 66,
+														GroupLayout.PREFERRED_SIZE))))
+						.addContainerGap()));
 		contentPane.setLayout(gl_contentPane);
 	}
 }
