@@ -23,6 +23,61 @@ class CalculadoraTest {
 		assertEquals(resultExpected, resultCalculated);
 	}
 	
+	/**
+	 * *feature*: (sobre la qual fem @Test): "minus" de la classe "Operations"
+	 * *given*: classe Operations
+	 */
+	
+	@Test
+	void testMinus() {
+		String num1 = "8";
+		String num2 = "4";
+		
+		Double resultExpected = 4.0;
+		Double resultCalculated = operations.minus(num1, num2);
+		assertEquals(resultExpected, resultCalculated);
+	}
+	
+	/**
+	 * *feature*: (sobre la qual fem @Test): "multiply" de la classe "Operations"
+	 * *given*: classe Operations
+	 */
+	@Test
+	void testmultiply() {
+		String num1 = "8";
+		String num2 = "4";
+		
+		Double resultExpected = 32.0;
+		Double resultCalculated = operations.multiply(num1, num2);
+		assertEquals(resultExpected, resultCalculated);
+	}
+	
+	/**
+	 * *feature*: (sobre la qual fem @Test): "oneDivide" de la classe "Operations"
+	 * *given*: classe Operations
+	 */
+	@Test
+	void testoneDivide() {
+		String num1 = "5";
+		
+		Double resultExpected = 0.2;
+		Double resultCalculated = operations.oneDivide(num1);
+		assertEquals(resultExpected, resultCalculated);
+	}
+	
+	/**
+	 * *feature*: (sobre la qual fem @Test): "percent" de la classe "Operations"
+	 * *given*: classe Operations
+	 */
+	@Test
+	void testpercent() {
+		String num1 = "10";
+		String num2 = "50";
+		
+		Double resultExpected = 5.0;
+		Double resultCalculated = operations.percent(num1, num2);
+		assertEquals(resultExpected, resultCalculated);
+	}
 	
 	/**
 	 * *feature*: (sobre la qual fem @Test): "power2" de la classe "Operations"
@@ -61,7 +116,6 @@ class CalculadoraTest {
 		String num1 = "4";
 		String num2 = "2";
 		
-		
 		Double resultExpected = 2.0;
 		Double resultCalculated = operations.divide(num1, num2);
 		assertEquals(resultExpected, resultCalculated);
@@ -81,9 +135,10 @@ class CalculadoraTest {
 		assertEquals(resultExpected, resultCalculated);
 		
 		// Sin signo
-		num1 = "-100.0";
-		resultExpected = "100.0";
+		num1 = "100.0";
+		resultExpected = "-100.0";
 		resultCalculated = operations.signChange(num1);
 		assertEquals(resultExpected, resultCalculated);
 	}
+
 }
