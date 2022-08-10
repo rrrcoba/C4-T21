@@ -260,6 +260,19 @@ public class Dashboard extends JFrame {
 					textFieldResult.setText(r);
 					addHist(r);
 				}
+				if(operator == btnPercent) {
+					if (num1.compareTo("") == 0) {
+						num1 = "0";
+					}
+					if (num2.compareTo("") == 0) {
+						num2 = "0";
+					}
+					Double result = operations.percent(num1, num2);
+					String r = String.valueOf(result);
+					textFieldResult.setText(r);
+					addHist(r);
+				}
+				
 			}
 		});
 
@@ -348,13 +361,20 @@ public class Dashboard extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				num2 = textFieldResult.getText();			
 				operator = btnX;
-
 			}
 		});
 
 
 		btnPercent = new JButton("%");
 		btnPercent.setFont(new Font("Arial Black", Font.PLAIN, 22));
+		btnPercent.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				num1 = textFieldResult.getText();
+				textFieldResult.setText("");		
+				operator = btnPercent;
+			}
+		});
+
 
 		btnSqrt = new JButton("sqrt");
 		btnSqrt.setFont(new Font("Arial Black", Font.PLAIN, 22));
