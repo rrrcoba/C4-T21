@@ -265,7 +265,7 @@ public class Dashboard extends JFrame {
 						num1 = "0";
 					}
 					if (num2.compareTo("") == 0) {
-						num2 = "0";
+						num2 = "1";
 					}
 					Double result = operations.percent(num1, num2);
 					String r = String.valueOf(result);
