@@ -52,7 +52,7 @@ public class Dashboard extends JFrame {
 	private JButton btnPercent;
 	private JButton btnSqrt;
 	private JButton btnElevated;
-	private JButton btnMoreLess;
+	private JButton btnSignChange;
 
 	private JLabel lblHistory;
 
@@ -204,7 +204,7 @@ public class Dashboard extends JFrame {
 		textFieldResult.setFont(new Font("Arial Black", Font.PLAIN, 22));
 		textFieldResult.setColumns(10);
 
-		// TODO
+		
 		btn_result = new JButton("=");
 		btn_result.setFont(new Font("Arial Black", Font.PLAIN, 22));
 		btn_result.addActionListener(new ActionListener() {
@@ -224,7 +224,8 @@ public class Dashboard extends JFrame {
 					textFieldResult.setText(r);
 					addHist(r);
 				}
-
+				
+				// Restar
 				if(operator == btnMinus) {
 					if (num1.compareTo("") == 0) {
 						num1 = "0";
@@ -238,6 +239,7 @@ public class Dashboard extends JFrame {
 					addHist(r);
 				}
 
+				// Multiplicar
 				if(operator == btnMultiply) {
 					if (num1.compareTo("") == 0) {
 						num1 = "0";
@@ -251,15 +253,18 @@ public class Dashboard extends JFrame {
 					addHist(r);
 				}
 
+				// Inverso
 				if(operator == btnX) {
-					if (num2.compareTo("") == 0) {
-						num2 = "0";
+					if (num1.compareTo("") == 0) {
+						num1 = "0";
 					}
-					Double result = operations.oneDivide(num2);
+					Double result = operations.oneDivide(num1);
 					String r = String.valueOf(result);
 					textFieldResult.setText(r);
 					addHist(r);
 				}
+				
+				// Porcentaje
 				if(operator == btnPercent) {
 					if (num1.compareTo("") == 0) {
 						num1 = "0";
@@ -273,6 +278,44 @@ public class Dashboard extends JFrame {
 					addHist(r);
 				}
 				
+				// Divide
+				if(operator == btnDivide) {
+					if (num1.compareTo("") == 0) {
+						num1 = "0";
+					}
+					Double result = operations.divide(num1, num2);
+					String r = String.valueOf(result);
+					textFieldResult.setText(r);
+					addHist(r);
+				}
+				
+				// Elevar al cuadrado
+				if(operator == btnElevated) {
+					Double result = operations.power2(num1);
+					String r = String.valueOf(result);
+					textFieldResult.setText(r);
+					addHist(r);
+				}
+				
+				// Raíz cuadrada
+				if(operator == btnSqrt) {
+					if (num1.compareTo("") == 0) {
+						num1 = "0";
+					}
+					Double result = operations.sqrt(num1);
+					String r = String.valueOf(result);
+					textFieldResult.setText(r);
+					addHist(r);
+				}
+				
+				// Cambiar signo
+				if(operator == btnSignChange) {
+					if ((num1.compareTo("") != 0) && (num1.compareTo("0")!=0)) {
+						String r = operations.signChange(num1);
+						textFieldResult.setText(r);
+					}
+				}
+				operator = null;
 			}
 		});
 
@@ -354,16 +397,23 @@ public class Dashboard extends JFrame {
 
 		btnDivide = new JButton("/");
 		btnDivide.setFont(new Font("Arial Black", Font.PLAIN, 22));
+		btnDivide.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				num1 = textFieldResult.getText();
+				textFieldResult.setText("");
+				operator = btnDivide;
+			}
+		});
 
 		btnX = new JButton("1/x");
 		btnX.setFont(new Font("Arial Black", Font.PLAIN, 22));
 		btnX.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				num2 = textFieldResult.getText();			
+				num1 = textFieldResult.getText();		
 				operator = btnX;
+				btn_result.doClick();
 			}
 		});
-
 
 		btnPercent = new JButton("%");
 		btnPercent.setFont(new Font("Arial Black", Font.PLAIN, 22));
@@ -375,15 +425,35 @@ public class Dashboard extends JFrame {
 			}
 		});
 
-
 		btnSqrt = new JButton("sqrt");
 		btnSqrt.setFont(new Font("Arial Black", Font.PLAIN, 22));
+		btnSqrt.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				num1 = textFieldResult.getText();		
+				operator = btnSqrt;
+				btn_result.doClick();
+			}
+		});
 
-		btnMoreLess = new JButton("+/-");
-		btnMoreLess.setFont(new Font("Arial Black", Font.PLAIN, 22));
+		btnSignChange = new JButton("+/-");
+		btnSignChange.setFont(new Font("Arial Black", Font.PLAIN, 22));
+		btnSignChange.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				num1 = textFieldResult.getText();		
+				operator = btnSignChange;
+				btn_result.doClick();
+			}
+		});
 
 		btnElevated = new JButton("x2");
 		btnElevated.setFont(new Font("Arial Black", Font.PLAIN, 22));
+		btnElevated.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				num1 = textFieldResult.getText();		
+				operator = btnElevated;
+				btn_result.doClick();
+			}
+		});
 
 		textFieldHist = new JTextField();
 		textFieldHist.setFont(new Font("Arial Black", Font.PLAIN, 16));
@@ -450,7 +520,7 @@ public class Dashboard extends JFrame {
 						.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 								.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 										.addGroup(gl_contentPane.createSequentialGroup().addGap(12)
-												.addComponent(btnMoreLess, GroupLayout.PREFERRED_SIZE, 106,
+												.addComponent(btnSignChange, GroupLayout.PREFERRED_SIZE, 106,
 														GroupLayout.PREFERRED_SIZE)
 												.addPreferredGap(ComponentPlacement.RELATED)
 												.addComponent(btn_0, GroupLayout.PREFERRED_SIZE, 108,
@@ -562,7 +632,7 @@ public class Dashboard extends JFrame {
 																GroupLayout.PREFERRED_SIZE)))
 										.addPreferredGap(ComponentPlacement.UNRELATED)
 										.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-												.addComponent(btnMoreLess, GroupLayout.PREFERRED_SIZE, 66,
+												.addComponent(btnSignChange, GroupLayout.PREFERRED_SIZE, 66,
 														GroupLayout.PREFERRED_SIZE)
 												.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 														.addComponent(btnPoint, GroupLayout.PREFERRED_SIZE, 66,
